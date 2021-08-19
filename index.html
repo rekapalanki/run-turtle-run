@@ -10,6 +10,9 @@
 
 
 <body>
+  <h2>Move turtle with arrow keys</h2>
+  <button class="restart">Restart</button>
+  <p></p>
   <img width="10%" src="./turtle.png" alt="turtle" class="turtle">
 
   <!-- Using CSS variables / custom properties : --x: 10px; -->
@@ -30,6 +33,7 @@
 
   <script>
     const turtle = document.querySelector('.turtle');
+    const restart = document.querySelector('.restart');
     let x = 0;
     let y = 0;
     let speed = 50;
@@ -76,6 +80,11 @@
       );
     }
 
+    function handleClick() {
+      location.reload();
+    }
+
+    restart.addEventListener('click', handleClick);
     window.addEventListener('keydown', handleKeydown);
   </script>
 

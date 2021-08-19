@@ -6,7 +6,8 @@
 html {
     --grey: #e7e7e7;
     --gray: var(--grey);
-    --blue: #0072B9;
+    --blue: #007289;
+    --darkBlue: #105e8b;
     --pink: #D60087;
     --yellow: #ffc600;
     --black: #2e2e2e;
@@ -24,6 +25,7 @@ html {
   }
   
   body {
+    padding: 1rem;
     font-size: 2rem;
     line-height: 1.5;
     background-color: var(--blue);
@@ -67,17 +69,18 @@ html {
   
   a.button, button, input[type="button"] {
     color: white;
-    background: var(--pink);
+    background: var(--darkBlue);
     padding: 1rem;
     border: 0;
     border: 2px solid transparent;
+    border-radius: 5px;
     text-decoration: none;
     font-weight: 600;
     font-size:2rem;
   }
   
   :focus {
-    outline-color: var(--pink);
+    outline-color: var(--darkBlue);
   }
   
   fieldset {
