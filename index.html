@@ -21,6 +21,10 @@
       <button class="down arrow">↓</button>
       <button class="restart">Restart</button>
       <button class="info">i</button>
+      <div class="control-info">
+        <h2>Controls:</h2>
+        <p>Move turtle with keyboard arrows. <br> Or use the buttons on the screen.</p>
+      </div>
     </div>
   </div>
   <img width="10%" src="./turtle.png" alt="turtle" class="turtle">
@@ -28,11 +32,10 @@
   <!-- Using CSS variables / custom properties to move turtle : --x: 10px; -->
 
   <style>
-    /* body {
-      margin-bottom: 160px;
-    } */
+    h2 {
+      padding: 1rem 1rem 0;
+    }
 
-    h2,
     .turtle,
     .control-panel {
       padding: 1rem;
@@ -90,6 +93,27 @@
 
     .info {
       grid-column: 17;
+    }
+
+    .control-info {
+      background-color: rgba(28, 132, 180, 0.9);
+      text-align: center;
+      color: white;
+      border-radius: 2rem;
+      grid-column: 2 / span 14;
+      grid-row: 1 / span 3;
+      /* Hide this div until we need it */
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(200%);
+      transition: all 1s;
+    }
+
+    .show {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateX(0);
+      transition: transform .5s;
     }
   </style>
 

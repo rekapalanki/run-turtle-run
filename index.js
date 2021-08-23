@@ -1,6 +1,8 @@
 const turtle = document.querySelector('.turtle');
 const arrows = document.querySelectorAll('.arrow');
 const restart = document.querySelector('.restart');
+const info = document.querySelector('.info');
+const controlInfo = document.querySelector('.control-info');
 let x = 0;
 let y = 0;
 let speed = 50;
@@ -10,6 +12,9 @@ let rotate = 0;
 function handleKeydown(event) {
   if (!event.key.includes('Arrow')) {
     return;
+  }
+  if (controlInfo.classList.contains('show')) {
+    return
   }
   switch (event.key) {
     case 'ArrowUp':
@@ -41,10 +46,6 @@ function handleKeydown(event) {
     --x: ${x}px; 
     --y: ${y}px`
   );
-}
-
-function handleRestartClick() {
-  location.reload();
 }
 
 function handleClick(event) {
@@ -80,8 +81,17 @@ function handleClick(event) {
       );
 }
 
-restart.addEventListener('click', handleRestartClick);
+function handleRestartClick() {
+    location.reload();
+}  
+
+function handleInfoClick(event) {
+    controlInfo.classList.toggle('show');
+}
+
 window.addEventListener('keydown', handleKeydown);
 arrows.forEach((arrow) => {
     arrow.addEventListener('click', handleClick)
 })
+restart.addEventListener('click', handleRestartClick);
+info.addEventListener('click', handleInfoClick);
