@@ -6,87 +6,92 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title></title>
   <link rel="stylesheet" href="./base.css">
+  <script src="./index.js" defer></script>
 </head>
 
 
 <body>
-  <h2>Move turtle with arrow keys</h2>
-  <button class="restart">Restart</button>
+  <h2>Run, turtle, run!</h2>
   <p></p>
+  <div class="panel-wrapper">
+    <div class="control-panel">
+      <button class="up arrow">↑</button>
+      <button class="left arrow">←</button>
+      <button class="right arrow">→</button>
+      <button class="down arrow">↓</button>
+      <button class="restart">Restart</button>
+      <button class="info">i</button>
+    </div>
+  </div>
   <img width="10%" src="./turtle.png" alt="turtle" class="turtle">
 
-  <!-- Using CSS variables / custom properties : --x: 10px; -->
+  <!-- Using CSS variables / custom properties to move turtle : --x: 10px; -->
 
   <style>
+    /* body {
+      margin-bottom: 160px;
+    } */
+
+    h2,
+    .turtle,
+    .control-panel {
+      padding: 1rem;
+    }
+
     .turtle {
       position: relative;
       --x: 0px;
       --y: 0px;
       --rotateX: 0;
       --rotate: 0;
-      /* Pay attention to the order!!! If you rotate something prior to translating it, it will fail! 
-      It rotates on the extended axis */
       transform: translateX(var(--x)) translateY(var(--y)) rotateY(var(--rotateX)) rotate(var(--rotate));
       transition: transform 0.3s;
     }
+
+    .panel-wrapper {
+      position: fixed;
+      bottom: 0;
+      /* height: 160px; */
+      width: 100vw;
+      background-color: rgba(0, 0, 0, .2);
+    }
+
+    .control-panel {
+      display: grid;
+      /* width: 100%; */
+      grid-template-columns: repeat(17, 1fr);
+      gap: 2px;
+    }
+
+    .up {
+      grid-column: 7;
+      grid-row: 1;
+    }
+
+    .left {
+      grid-column: 6;
+      grid-row: 2;
+    }
+
+    .right {
+      grid-column: 8;
+      grid-row: 2;
+    }
+
+    .down {
+      grid-column: 7;
+      grid-row: 3;
+    }
+
+    .restart {
+      grid-column: 10 / span 2;
+      grid-row: 2;
+    }
+
+    .info {
+      grid-column: 17;
+    }
   </style>
-
-  <script>
-    const turtle = document.querySelector('.turtle');
-    const restart = document.querySelector('.restart');
-    let x = 0;
-    let y = 0;
-    let speed = 50;
-    let flipped = false;
-    let rotate = 0;
-    function handleKeydown(event) {
-      if (!event.key.includes('Arrow')) {
-        return;
-      }
-      switch (event.key) {
-        case 'ArrowUp':
-          y -= speed;
-          rotate = '-90deg';
-          break;
-        case 'ArrowDown':
-          y += speed;
-          rotate = '90deg';
-          break;
-        case 'ArrowRight':
-          x += speed;
-          flipped = false;
-          rotate = '0deg';
-          break;
-        case 'ArrowLeft':
-          x -= speed;
-          flipped = true;
-          rotate = '0deg';
-          break;
-        default:
-          console.log('This is not a valid move');
-          break;
-      }
-      // Applying style does not work for turtle
-      // because we don't have an attribute --x nor --y yet
-      // turtle.style['--x'] = `${x}px`;
-      // turtle.style['--y'] = `${y}px`;
-      // So, instead, we have to add it as a style attribute:
-      turtle.setAttribute(
-        'style',
-        `--rotateX: ${flipped ? '180deg' : '0deg'};
-        --rotate: ${rotate};
-        --x: ${x}px; 
-        --y: ${y}px`
-      );
-    }
-
-    function handleClick() {
-      location.reload();
-    }
-
-    restart.addEventListener('click', handleClick);
-    window.addEventListener('keydown', handleKeydown);
-  </script>
 
 </body>
 
