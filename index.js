@@ -2,7 +2,7 @@ const turtle = document.querySelector('.turtle');
 const arrows = document.querySelectorAll('.arrow');
 const restart = document.querySelector('.restart');
 const info = document.querySelector('.info');
-const controlInfo = document.querySelector('.control-info');
+const controlInfoOuter = document.querySelector('.control-info.outer');
 let x = 0;
 let y = 0;
 let speed = 50;
@@ -10,10 +10,13 @@ let flipped = false;
 let rotate = 0;
 
 function handleKeydown(event) {
+  if (event.key.includes('Esc')) {
+    controlInfoOuter.classList.remove('show');
+  }
   if (!event.key.includes('Arrow')) {
     return;
   }
-  if (controlInfo.classList.contains('show')) {
+  if (controlInfoOuter.classList.contains('show')) {
     return
   }
   switch (event.key) {
@@ -86,8 +89,15 @@ function handleRestartClick() {
 }  
 
 function handleInfoClick(event) {
-    controlInfo.classList.toggle('show');
+    controlInfoOuter.classList.toggle('show');
 }
+
+controlInfoOuter.addEventListener("click", function (event) {
+  const isOutside = !event.target.closest(".inner");
+  if (isOutside) {
+    controlInfoOuter.classList.remove('show');
+  }
+});
 
 window.addEventListener('keydown', handleKeydown);
 arrows.forEach((arrow) => {
